@@ -82,11 +82,15 @@ public class Gun : MonoBehaviour
     /// </summary>
     private Entity mBulletEntityPrefab;
 
+    public GameObject player;
+
     /// <summary>
     /// Called when the script instance is first loaded.
     /// </summary>
     private void Awake()
     { mBulletDirector = transform; }
+
+
 
     /// <summary>
     /// Called before the first frame update.
@@ -198,8 +202,9 @@ public class Gun : MonoBehaviour
          */
         
         SpawnBullet(
-            new Vector3{ x = 0.0f, y = 0.0f, z = 0.0f }, 
-            Quaternion.Euler(0.0f, 0.0f, 0.0f)
+            //new Vector3{ x = 0.0f, y = 0.0f, z = 0.0f }, 
+            director.position,
+            player.transform.rotation
         );
     }
 

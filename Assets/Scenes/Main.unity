@@ -1218,7 +1218,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 49.999992, y: 49.999954}
+  m_AnchoredPosition: {x: 50, y: 49.999954}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &996938055
@@ -1510,9 +1510,9 @@ Camera:
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.222808
+    x: 0.19260868
     y: 0
-    width: 0.554384
+    width: 0.61478263
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
@@ -2088,7 +2088,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -49.999992, y: 49.999954}
+  m_AnchoredPosition: {x: -50, y: 49.999954}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1921442517
@@ -2720,6 +2720,10 @@ PrefabInstance:
       propertyPath: primaryPlayer
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1204133201493807927, guid: 44209977f93d7854bac517dff34087fc, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 2023264673}
     - target: {fileID: 1204133201493807927, guid: 44209977f93d7854bac517dff34087fc, type: 3}
       propertyPath: shotgun
       value: 0
