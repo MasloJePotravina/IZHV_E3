@@ -1280,7 +1280,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1005452474
 Transform:
   m_ObjectHideFlags: 0
@@ -1510,9 +1510,9 @@ Camera:
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.19260868
+    x: 0.19561404
     y: 0
-    width: 0.61478263
+    width: 0.6087719
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
@@ -1673,7 +1673,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1509093167
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2731,6 +2731,14 @@ PrefabInstance:
     - target: {fileID: 1204133201493807927, guid: 44209977f93d7854bac517dff34087fc, type: 3}
       propertyPath: fireRate
       value: 600
+      objectReference: {fileID: 0}
+    - target: {fileID: 1204133201493807927, guid: 44209977f93d7854bac517dff34087fc, type: 3}
+      propertyPath: shotgunSpread
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1204133201493807927, guid: 44209977f93d7854bac517dff34087fc, type: 3}
+      propertyPath: shotgunBullets
+      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 44209977f93d7854bac517dff34087fc, type: 3}

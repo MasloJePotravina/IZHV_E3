@@ -84,6 +84,12 @@ public class Gun : MonoBehaviour
 
     public GameObject player;
 
+    private float firstPelletDirection;
+
+    private int spawnedBullets;
+
+    
+
     /// <summary>
     /// Called when the script instance is first loaded.
     /// </summary>
@@ -138,7 +144,8 @@ public class Gun : MonoBehaviour
             var secondsPerBullet = 1.0f / (fireRate / 60.0f);
 
             while (mCoolDown <= 0.0f)
-            { // Spawn corresponding number of bullets.
+            {
+                // Spawn corresponding number of bullets.
                 ShootGun(mBulletDirector);
                 
                 // "Heat up" the gun.
@@ -200,12 +207,54 @@ public class Gun : MonoBehaviour
          *  - Number / spread of shotgun bullets : shotgunBullets, shotgunSpread
          * Implement both single shot and shotgun (swap by pressing <SPACE> by default)
          */
-        
-        SpawnBullet(
-            //new Vector3{ x = 0.0f, y = 0.0f, z = 0.0f }, 
-            director.position,
-            player.transform.rotation
-        );
+
+
+        /*Example for shotgun shot calculations:
+             * Player aims at 90 degrees
+             * Shotgun spread is set to 30 degrees
+             * Shotgun shoots 6 bullets
+             * First pellet direction is therefore 90 - 30/2 = 75
+             * The first bullet will fly towards 75 + 0*30/(6-1) = 75
+             * The second bullet will fly towards 75 + 1*30/(6-1) = 81
+             * The third bullet will fly towards 75 + 2*30/(6-1) = 87
+             * Fourth = 93
+             * Fifth = 99
+             * Sixth = 105
+             * This gives us an equal spread of bullets around the target
+             */
+
+        if (shotgun)
+        {
+
+            //Direction of the first bullet = player-aim - spread in degrees/2
+            firstPelletDirection = player.transform.eulerAngles.y - shotgunSpread / 2;
+
+            //Amount of bullets we already spawned
+            spawnedBullets = 0;
+
+            //Bullets are spawned in this cycle
+            while (spawnedBullets != shotgunBullets)
+            {
+                SpawnBullet(
+                    //Gun position
+                    director.position,
+                    //Every consecutive bullet is calculated by adding shotgunSpread/(shotgunBullets - 1) to the direction of the first bullet
+                    Quaternion.Euler(0, firstPelletDirection + (spawnedBullets * shotgunSpread / (shotgunBullets - 1)), 0)
+                ) ;
+                spawnedBullets++;
+            }
+            
+
+        }
+        else
+        {
+            SpawnBullet(
+                //Gun position
+                director.position,
+                //Player rotation (aim)
+                player.transform.rotation
+            );
+        }
     }
 
     /// <summary>

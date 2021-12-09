@@ -35,6 +35,9 @@ public class Enemy : MonoBehaviour
     /// </summary>
     private BoxCollider mBoxCollider;
 
+    private GameObject nearestTarget;
+
+
     /// <summary>
     /// Called when the script instance is first loaded.
     /// </summary>
@@ -68,6 +71,13 @@ public class Enemy : MonoBehaviour
          *  - Physical body of the enemy: mRigidBody
          * Implement a simple AI, which will head towards the closest player and follow them.
          */
+
+        nearestTarget = GameManager.Instance.NearestPlayer(transform.position);
+        if(nearestTarget != null){
+            transform.LookAt(nearestTarget.transform.position);
+            transform.localPosition = Vector3.MoveTowards (transform.localPosition, nearestTarget.transform.position, Time.deltaTime * speed);
+        }
+         
     }
 
     /// <summary>
