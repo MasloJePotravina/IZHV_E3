@@ -82,8 +82,10 @@ public class GameManager : MonoBehaviour
                     // Update the state.
                     Settings.Instance.RemovePlayer(playerGO);
                     Destroy(player.gameObject);
+                }else{
+                    ResetGame();
                 }
-            }
+            } 
         }
         
         // Update the current list of players.
