@@ -45,6 +45,9 @@ public class CameraHelper : MonoBehaviour
     /// Current target we are working with.
     /// </summary>
     private Vector2 mTarget;
+
+    
+
     
     /// <summary>
     /// Called before the first frame update.
@@ -59,9 +62,46 @@ public class CameraHelper : MonoBehaviour
     {
         // Fit the camera to the target resolution, if necessary.
         FitTargetResolution(targetResolution);
-        // Follow the target, if enabled.
-        if (doFollowTarget)
-        { FollowTarget(followTarget); }
+
+        //No idea why but without this check I constantly get an error in editor about the instance possibly being null
+        //This isnt the case with scripts for some reason
+        if (GameManager.Instance != null){
+
+            var livingPlayerCount = GameManager.Instance.LivingPlayers().Count;
+            var currentPosition = transform.position;
+            var targetPosition = new Vector3 { x = 0f,y = 0f, z = 0f};
+            
+            
+            
+            // Follow the target, if enabled.
+            if (doFollowTarget){
+                
+                //Calculate midpoint
+                foreach (GameObject player in GameManager.Instance.LivingPlayers())
+                {
+                    targetPosition = targetPosition + player.transform.position;
+                }
+                targetPosition = (targetPosition / livingPlayerCount) - transform.forward;
+
+                if(livingPlayerCount == 2){
+                    float distance = Vector3.Distance(GameManager.Instance.LivingPlayers()[0].transform.position, GameManager.Instance.LivingPlayers()[1].transform.position);
+                    if (distance > 6){
+                        targetResolution = new Vector2(0.1f*(distance+4)*6.0f,0.1f*(distance+4)*6.0f);
+                    }else{
+                        targetResolution = new Vector2(6.0f,6.0f);
+                    }
+                }else{
+                    targetResolution = new Vector2(6.0f,6.0f);
+                }
+
+
+
+                //Edited followtarget to use vector 3 instead of gameobject
+                //Move to the midpoint
+                FollowTarget(targetPosition); 
+
+            }
+        }
     }
 
     public void FitTargetResolution(Vector2 target)
@@ -106,15 +146,11 @@ public class CameraHelper : MonoBehaviour
         mTarget = target;
     }
 
-    public void FollowTarget(GameObject target)
+    public void FollowTarget(Vector3 targetPosition)
     {
-        // Safety check...
-        if (target == null)
-        { return; }
         
-        // Move the camera to be above the target's location.
+        // Move the camera to be above the targetPosition.
         var currentPosition = transform.position;
-        var targetPosition = target.transform.position;
         transform.position = new Vector3{
             x = targetPosition.x, 
             y = currentPosition.y, 

@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// List of player which are currently alive.
     /// </summary>
-    private List<GameObject> mLivingPlayers = new List<GameObject>();
+    public List<GameObject> mLivingPlayers = new List<GameObject>();
 
     /// <summary>
     /// Singleton instance of the GameManager.
